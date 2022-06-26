@@ -46,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getData\": () => (/* binding */ getData)\n/* harmony export */ });\nconst getData = (callback) => {\r\n    return fetch('../dist/json/products.json', {\r\n        method: 'GET',\r\n\r\n    }).then(res => res.json())\r\n        .then(res => {\r\n            callback(res.products)\r\n\r\n        })\r\n\r\n        .catch(error => {\r\n\r\n            console.log(error);\r\n\r\n        })\r\n}\n\n//# sourceURL=webpack:///./modules/getData.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getData\": () => (/* binding */ getData)\n/* harmony export */ });\nconst getData = (callback) => {\r\n    return fetch('../dist/json/products.json', {\r\n        method: 'GET',\r\n\r\n    }).then(res => res.json())\r\n        .then(res => {\r\n\r\n            callback(res)\r\n\r\n        })\r\n\r\n        .catch(error => {\r\n\r\n            console.log(error);\r\n\r\n        })\r\n}\n\n//# sourceURL=webpack:///./modules/getData.js?");
 
 /***/ }),
 

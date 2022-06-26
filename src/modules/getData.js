@@ -4,7 +4,8 @@ export const getData = (callback) => {
 
     }).then(res => res.json())
         .then(res => {
-            callback(res.products)
+
+            callback(res)
 
         })
 
