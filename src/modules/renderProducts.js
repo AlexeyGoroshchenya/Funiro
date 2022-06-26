@@ -7,6 +7,21 @@ export const renderProducts = () => {
 
 
 
+
+    let numberCards = 4
+
+
+    const setNumberOfCards = () => {
+        if (galery.clientWidth > 950 && galery.clientWidth < 1237) {
+            numberCards = 6
+        } else {
+            numberCards = 4
+        }
+    }
+
+
+
+
     const renderCard = (item) => {
 
         const galeryCard = document.createElement('article');
@@ -101,7 +116,7 @@ export const renderProducts = () => {
         galery.innerHTML = "";
 
         array.forEach((item, index) => {
-            if (index < 4) {
+            if (index < numberCards) {
                 renderCard(item);
             }
 
@@ -113,14 +128,14 @@ export const renderProducts = () => {
         const rendered = document.querySelectorAll('.products__item');
 
         arr.forEach((product, index) => {
-            if (index >= rendered.length && index < (rendered.length + 4)) {
+            if (index >= rendered.length && index < (rendered.length + numberCards)) {
                 renderCard(product)
             }
         })
 
     }
 
-
+    setNumberOfCards()
     getData(startRender)
 
 
@@ -129,5 +144,7 @@ export const renderProducts = () => {
 
         getData(moreRender)
     })
+
+
 
 }
