@@ -47,8 +47,9 @@ export const changeCart = () => {
 
         })
 
-        const cartListBtn = document.createElement('div');
+        const cartListBtn = document.createElement('button');
         cartListBtn.classList.add('cart__buy')
+        // cartListBtn.setAttribute('type', 'submit')
         cartListBtn.textContent = 'Buy now'
         cartList.append(cartListBtn);
 
@@ -67,8 +68,11 @@ export const changeCart = () => {
         if (command === 'delete') {
             removeItemFromCart(itemId)
 
-            renderProductBtn(item.querySelector('.actions-product__button'), 'Add to cart')
-            item.querySelector('.actions-product__button').classList.remove('in-cart')
+            if (item) {
+                renderProductBtn(item.querySelector('.actions-product__button'), 'Add to cart')
+                item.querySelector('.actions-product__button').classList.remove('in-cart')
+            }
+
 
         }
 
@@ -86,8 +90,11 @@ export const changeCart = () => {
             } else {
                 removeItemFromCart(itemId)
 
-                renderProductBtn(item.querySelector('.actions-product__button'), 'Add to cart')
-                item.querySelector('.actions-product__button').classList.remove('in-cart')
+                if (item) {
+                    renderProductBtn(item.querySelector('.actions-product__button'), 'Add to cart')
+                    item.querySelector('.actions-product__button').classList.remove('in-cart')
+                }
+
             }
 
 

@@ -3,6 +3,8 @@ export const galery = () => {
     const galeryImages = document.querySelectorAll('.row-furniture__item')
     const furniture = document.querySelector('.furniture')
 
+    let coordX = null;
+
 
     const showCurrentImage = (elem) => {
 
@@ -100,4 +102,31 @@ export const galery = () => {
 
 
     })
+
+    galery.querySelector('.galery__image').addEventListener('pointerdown', (e) => {
+        coordX = e.clientX;
+
+    }, false)
+
+    galery.querySelector('.galery__image').addEventListener('pointermove', (e) => {
+
+        if (!coordX) return
+
+        let touchEnd = e.clientX;
+
+        if (touchEnd > coordX) {
+            if (getNextImageName(1)) {
+                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.jpg" alt="">`
+            }
+
+        } else if (touchEnd < coordX) {
+            if (getNextImageName(-1)) {
+                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.jpg" alt="">`
+            }
+
+        }
+
+        coordX = null;
+
+    }, false)
 }

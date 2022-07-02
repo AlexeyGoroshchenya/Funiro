@@ -9,6 +9,7 @@ import { renderProducts } from './modules/renderProducts';
 import { changeCart } from './modules/changeCart';
 import { galery } from './modules/galery';
 import { scrollGalery } from './modules/scrollGalery';
+import { sendEmailForm } from './modules/sendEmailForm';
 
 
 menu();
@@ -20,8 +21,9 @@ changeCart();
 galery();
 
 scrollGalery();
+sendEmailForm(document.querySelector('.footer__form'), document.querySelector('.footer__subscribe'));
 
 //валидация и отправка почты
 //адаптив
-//попап пользовательского меню
+
 //отправка заказа

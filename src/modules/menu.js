@@ -4,6 +4,11 @@ export const menu = () => {
     const menu = document.querySelector('.menu__list');
 
 
+    const toggleUserMenu = () => {
+        document.querySelector('.user__list').classList.toggle('user__list-active')
+
+    }
+
     const moveUserMenu = () => {
         if (window.screen.width < 768) {
 
@@ -77,11 +82,35 @@ export const menu = () => {
             document.querySelector('.search-form-item').classList.remove('search-form-item-active')
         }
 
-        if (e.target.closest('.header__button') || e.target.matches('.menu__item>a')) {
-            toggleMenu()
 
 
+        if (header.querySelector('.menu__list-active')) {
+            if (!e.target.closest('.menu__list') || e.target.closest('.header__button') || e.target.matches('.menu__item>a')) {
+                toggleMenu()
+            }
+
+        } else {
+            if (e.target.closest('.header__button')) {
+                toggleMenu()
+            }
         }
+
+
+
+        if (header.querySelector('.user__list-active')) {
+            if (!e.target.closest('.user__list')) {
+                toggleUserMenu()
+            }
+        } else {
+            if (e.target.closest('.user__icon')) {
+                toggleUserMenu()
+            }
+        }
+
+
+
+
+
 
     })
 

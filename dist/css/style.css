@@ -573,6 +573,8 @@ ul {
 
 }
 
+
+
 /*---------------------------------------*/
 
 .cart {
@@ -765,10 +767,11 @@ ul {
 .user__icon {
   height: 40px;
   width: 40px;
-  overflow: hidden;
   border-radius: 50%;
+  overflow: hidden;
   position: relative;
   z-index: 1;
+  cursor: pointer;
 }
 
 .user__icon img {
@@ -777,8 +780,45 @@ ul {
   left: 0;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   z-index: 1;
+}
+
+.user__list {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  height: auto;
+  width: 200px;
+  background-color: #e89f71;
+  z-index: 10;
+  padding: 20px;
+  transform: translateY(-100vh);
+  transition-duration: 0.5s;
+
+}
+
+.user__list-active {
+  transform: translateY(120px);
+}
+
+.user__list a {
+  color: #F9F1E7;
+}
+
+.user__link:not(:last-child) {
+  padding-bottom: 10px;
+}
+
+@media (max-width: 991.98px) {
+  .user__link:not(:last-child) {
+    padding-bottom: 20px;
+  }
+
+  .user__list-active {
+    transform: translateY(150px);
+  }
 }
 
 .header__button {}
@@ -2194,6 +2234,7 @@ ul {
   width: 100%;
   display: flex;
   align-items: center;
+  padding-bottom: 15px;
 }
 
 .footer__subscribe__input {

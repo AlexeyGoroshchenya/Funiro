@@ -8,6 +8,7 @@
 		rel="stylesheet" />
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="dist/css/style.css" />
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="dist/js/main.js" defer></script>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<meta name="viewport" content="width=device-width">
@@ -73,13 +74,27 @@
 					</div>
 					<div class="user__cart cart"><span></span>
 						<a class="cart__icon"><img src="dist/img/iconsfont/cart.svg" alt=""></a>
-						<div class="cart__body">
+						<form action="#" method="POST" class="cart__body">
 							<ul class="cart__list">
 
+
 							</ul>
-						</div>
+						</form>
 					</div>
-					<div class="user__icon"><img src="dist/img/1653662432165.jpg" alt=""></div>
+					<div class="user__menu">
+						<div class="user__icon"><img src="dist/img/1653662432165.png" alt="">
+
+						</div>
+						<ul class="user__list">
+							<li class="user__link"><a href="#"> My Account</a></li>
+							<li class="user__link"><a href="#">Checkout</a></li>
+							<li class="user__link"><a href="#">My Cart</a></li>
+							<li class="user__link"><a href="#">My catalog</a></li>
+
+
+						</ul>
+					</div>
+
 				</div>
 
 				<div class="header__button">
@@ -633,7 +648,7 @@
 				<div class="footer__title">Stay Updated</div>
 				<form action="#" class="footer__form">
 
-					<input type="text" class="footer__subscribe__input" placeholder="Enter your email">
+					<input type="text" class="footer__subscribe__input" name="email" placeholder="Enter your email">
 					<button class="footer__subscribe__btn" type="submit"><img src="dist/img/subscribe.svg"
 							alt=""></button>
 
