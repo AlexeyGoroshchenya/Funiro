@@ -46,7 +46,7 @@ export const isMobile = {
     }
 }             // если isMobile.any() возвращает true пользователь пришел с мобильного устройства
 
-const blockBody = () => {
+export const blockBody = () => {
     function calcScroll() {
         let scrollWidth = 0;
         let scrollHeight = Math.max(
@@ -68,14 +68,14 @@ const blockBody = () => {
         return scrollWidth;
     }
 
-    document.body.style.paddingRight = `${calcScroll()}px`;
+    document.body.style.marginRight = `${calcScroll()}px`;
     document.body.style.overflow = 'hidden'
 
 
 }
 
-const unblockBody = () => {
-    document.body.style.paddingRight = '0';
+export const unblockBody = () => {
+    document.body.style.marginRight = '0';
     document.body.style.overflow = 'auto';
 
 }

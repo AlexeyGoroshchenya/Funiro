@@ -4,10 +4,11 @@ export const sendEmailForm = (form, elem) => {
 
     const statusBlock = document.createElement('div');
 
-
+    const errorText = 'Something went wrong...';
     const loadText = 'The application is sent...';
     const successText = 'Subscription is issued';
-    const notValidText = 'Please check the entered data'
+    const notValidText = 'Please check the entered data';
+
 
 
     const showSubmitStatus = (str) => {
@@ -38,7 +39,8 @@ export const sendEmailForm = (form, elem) => {
 
 
     const sendToTelegram = (data) => {
-        const URI_API = `https://api.telegram.org/bot5441053399:AAHmtB5dRwz1LnS692orcmhVk3U06vzRUkA/sendMessage`
+        const token = '5441053399:AAHmtB5dRwz1LnS692orcmhVk3U06vzRUkA'
+        const URI_API = `https://api.telegram.org/bot${token}/sendMessage`
 
         let message = `<b> Заявка с сайта Funiro </b>\n`;
         message += `<b>Почта: ${data.email}  </b>`;
@@ -48,6 +50,20 @@ export const sendEmailForm = (form, elem) => {
             parse_mode: 'html',
             text: message
         })
+            .then((res) => {
+                showSubmitStatus(successText)
+
+                setTimeout(() => {
+                    statusBlock.textContent = ''
+
+                }, 5000)
+
+                form.querySelector('input').value = ''
+            })
+            .catch((err) => {
+                console.log(err);
+                showSubmitStatus(errorText)
+            })
     }
 
     const submitData = () => {
@@ -62,18 +78,7 @@ export const sendEmailForm = (form, elem) => {
         if (validate(formInput)) {
 
             sendToTelegram(formBody)
-            showSubmitStatus(successText)
 
-            setTimeout(() => {
-
-                // closeModal(document.querySelector('.alert'), 'alert-hidden')
-                statusBlock.textContent = ''
-                // closeModal(document.querySelector('.feedback'), 'feedback-hidden');
-                // closeModal(document.querySelector('.authorization'), 'authorization-hidden');
-
-            }, 5000)
-
-            formInput.value = ''
 
         } else {
             console.log('данные не валидны');

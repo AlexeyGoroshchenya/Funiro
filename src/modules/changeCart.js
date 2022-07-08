@@ -19,39 +19,67 @@ export const changeCart = () => {
 
     }
 
+
+    //required
+
     const renderCartBody = () => {
 
-        cartList.innerHTML = ''
+        let total = 0;
+
+        cartList.innerHTML = `
+        <div class="list-cart__title">Checkout</div>
+		<div class="list-cart__close">+</div>
+        <li class="list-cart__items">
+
+        </li>
+        <div class="list-cart__total"></div>
+        <div class="list-cart__user">
+            <input type="text" class="list-cart__name" placeholder="Please indicate your name" name="name" >
+            <input type="tel" class="list-cart__phone" placeholder="Please indicate your phone" name="phone" >
+        </div>
+        <button type="submit" class="list-cart__button button">Buy now</button>`
+
+        const cartListItems = cartList.querySelector('.list-cart__items');
 
         cart.forEach((item) => {
+
             const cartItem = document.createElement('li');
             cartItem.classList.add('cart__item')
             cartItem.setAttribute('item-id', `${item.pid}`)
+
+            let totalPrice = (+item.quantity) * (parseInt(item.item.price.replace(/[\s.,%]/g, '')))
             cartItem.innerHTML = `
         <div class="cart__image"> <img src="dist/img/products/${item.item.image}" alt=""></div>
         <div class="cart__text">
             <a class="cart__title">${item.item.title}</a>
             <div class="cart__quantity quantity-cart">
-                <div class="quantity-cart__title">Quantity:</div>
+                
                 <div class="quantity-cart__row">
+                <div class="quantity-cart__column"><div class="quantity-cart__title">Quantity:</div>
                     <div class="quantity-cart__less">-</div>
                     <div class="quantity-cart__quantity">${item.quantity}</div>
                     <div class="quantity-cart__more">+</div>
+                </div>
+                <div class="quantity-cart__column">
+                    
+                    <div class="quantity-cart__price">Price: <p> ${totalPrice} </p></div>
+                    
+                </div>
                 </div>
             </div>
             <div class="cart__delete">Delete</div>
         </div>
         `
 
-            cartList.append(cartItem);
+            cartListItems.append(cartItem);
+
+            total += totalPrice
 
         })
 
-        const cartListBtn = document.createElement('button');
-        cartListBtn.classList.add('cart__buy')
-        // cartListBtn.setAttribute('type', 'submit')
-        cartListBtn.textContent = 'Buy now'
-        cartList.append(cartListBtn);
+        cartList.querySelector('.list-cart__total').innerHTML = `Total price: ${total} Rp`
+
+
 
 
 
@@ -236,6 +264,9 @@ export const changeCart = () => {
 
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
+
+
+
             renderCartIcon(cart.length, 'flex')
 
 
@@ -243,6 +274,8 @@ export const changeCart = () => {
             renderCartIcon('', 'none')
         }
         renderCartBody()
+
+
     }
 
 
@@ -253,6 +286,8 @@ export const changeCart = () => {
     }, false);
 
     document.addEventListener('click', (e) => {
+
+
 
         if (e.target.classList.contains('actions-product__button') && !e.target.classList.contains('in-cart')) {
             e.preventDefault()
@@ -281,12 +316,12 @@ export const changeCart = () => {
 
         }
 
-        if (e.target.closest('.user__cart') && cart.length > 0) {
+        if (e.target.closest('.user__cart') && cartList.querySelector('.cart__item')) {
 
             cartList.classList.add('cart__list-active')
         }
 
-        if (cartList.classList.contains('cart__list-active') && !e.target.closest('.user__cart')) {
+        if (cartList.classList.contains('cart__list-active') && e.target.classList.contains('list-cart__close')) {
 
             cartList.classList.remove('cart__list-active')
         }

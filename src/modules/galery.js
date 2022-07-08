@@ -1,7 +1,11 @@
+import { blockBody } from './helpers';
+import { unblockBody } from './helpers';
+
 export const galery = () => {
     const galery = document.querySelector('.galery')
     const galeryImages = document.querySelectorAll('.row-furniture__item')
     const furniture = document.querySelector('.furniture')
+    const galeryImage = galery.querySelector('.galery__image')
 
     let coordX = null;
 
@@ -9,7 +13,7 @@ export const galery = () => {
     const showCurrentImage = (elem) => {
 
         let currentImage = elem.closest('.row-furniture__item').getAttribute('href')
-        galery.querySelector('.galery__image').innerHTML = `<img src="${currentImage}" alt="">`
+        galeryImage.innerHTML = `<img src="${currentImage}" alt="">`
     }
 
     const getCurrentImageName = () => {
@@ -50,20 +54,36 @@ export const galery = () => {
 
     }
 
-    const showOtherImage = (direction, elem) => {
+    const showOtherImage = (direction) => {
 
         if (direction === 'next') {
 
-            // getNextImageName()
-
             if (getNextImageName(1)) {
-                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.jpg" alt="">`
+                galeryImage.classList.add('galery-in-transition')
+                setTimeout(() => {
+                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.jpg" alt="">`;
+
+                    setTimeout(() => {
+                        galeryImage.classList.remove('galery-in-transition')
+                    }, 200)
+
+                }, 200)
+
             }
 
         }
         if (direction === 'prev') {
             if (getNextImageName(-1)) {
-                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.jpg" alt="">`
+                galeryImage.classList.add('galery-in-transition')
+                setTimeout(() => {
+                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.jpg" alt="">`;
+
+                    setTimeout(() => {
+                        galeryImage.classList.remove('galery-in-transition')
+                    }, 200)
+
+                }, 200)
+
             }
         }
     }
@@ -75,6 +95,7 @@ export const galery = () => {
 
             showCurrentImage(e.target)
             galery.classList.toggle('galery-active')
+            blockBody()
 
 
         }
@@ -86,29 +107,30 @@ export const galery = () => {
     galery.addEventListener('click', (e) => {
 
         if (e.target.closest('.galery__next')) {
-            showOtherImage('next', e.target)
+            showOtherImage('next')
 
 
         }
 
         if (e.target.closest('.galery__prev')) {
-            showOtherImage('prev', e.target)
+            showOtherImage('prev')
         }
 
         if (e.target.closest('.galery__button')) {
             galery.classList.toggle('galery-active')
+            unblockBody()
         }
 
 
 
     })
 
-    galery.querySelector('.galery__image').addEventListener('pointerdown', (e) => {
+    galeryImage.addEventListener('pointerdown', (e) => {
         coordX = e.clientX;
 
     }, false)
 
-    galery.querySelector('.galery__image').addEventListener('pointermove', (e) => {
+    galeryImage.addEventListener('pointermove', (e) => {
 
         if (!coordX) return
 
@@ -116,12 +138,12 @@ export const galery = () => {
 
         if (touchEnd > coordX) {
             if (getNextImageName(1)) {
-                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.jpg" alt="">`
+                showOtherImage('next')
             }
 
         } else if (touchEnd < coordX) {
             if (getNextImageName(-1)) {
-                galery.querySelector('.galery__image').innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.jpg" alt="">`
+                showOtherImage('prev')
             }
 
         }
