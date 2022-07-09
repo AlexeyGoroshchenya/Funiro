@@ -1,3 +1,6 @@
+import { blockBody } from './helpers';
+import { unblockBody } from './helpers';
+
 export const menu = () => {
 
     const header = document.querySelector('.header');
@@ -87,11 +90,13 @@ export const menu = () => {
         if (header.querySelector('.menu__list-active')) {
             if (!e.target.closest('.menu__list') || e.target.closest('.header__button') || e.target.matches('.menu__item>a')) {
                 toggleMenu()
+                unblockBody()
             }
 
         } else {
             if (e.target.closest('.header__button')) {
                 toggleMenu()
+                blockBody()
             }
         }
 

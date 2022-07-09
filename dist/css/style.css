@@ -290,9 +290,9 @@ ul {
     top: 0;
     left: -100vw;
     padding: 40px;
-    margin-top: 75px;
+    margin-top: 125px;
     overflow: auto;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: #E89F71;
     justify-content: flex-start;
@@ -304,6 +304,7 @@ ul {
 
   .menu__list-active {
     left: 0;
+    padding-bottom: 125px;
   }
 }
 
@@ -311,7 +312,7 @@ ul {
 
 .menu__item {
   margin: 0 3px;
-  padding: 5px 0;
+  padding: 5px;
   position: relative;
 
 }
@@ -331,7 +332,7 @@ ul {
   transform: translate(5px, 5px);
   transition-duration: 0.5s;
   background-color: #eeeeee86;
-
+  display: inline-block;
 }
 
 .menu__arrow img {

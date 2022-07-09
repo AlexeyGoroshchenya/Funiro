@@ -92,6 +92,7 @@ export const changeCart = () => {
 
 
         if (command === 'delete') {
+            console.log(itemId);
             removeItemFromCart(itemId)
 
             if (item) {
@@ -156,26 +157,21 @@ export const changeCart = () => {
 
         let productToRemove = 0
 
-        let cartArr = [];
 
-        if (localStorage.getItem('cart')) {
-            cartArr = JSON.parse(localStorage.getItem('cart'));
-        }
-
-        cartArr.find((item, index) => {
+        cart.find((item, index) => {
             if (item.pid == id) {
                 productToRemove = index
             };
         });
 
-        cartArr.splice(productToRemove, 1)
+        cart.splice(productToRemove, 1)
 
         localStorage.removeItem('cart')
-        if (cartArr.length > 0) {
+        if (cart.length > 0) {
 
-            localStorage.setItem('cart', JSON.stringify(cartArr))
+            localStorage.setItem('cart', JSON.stringify(cart))
 
-            renderCartIcon(cartArr.length, 'flex')
+            renderCartIcon(cart.length, 'flex')
         } else {
             renderCartIcon('', 'none')
         }
