@@ -139,6 +139,10 @@ body {
 
 }
 
+body::-webkit-scrollbar {
+  width: 0;
+}
+
 a {
   color: #3a3a3a;
 }
@@ -156,6 +160,7 @@ ul {
   max-width: 1270px;
   padding: 0 15px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 /*@media (max-width: 1087px) {
@@ -1683,11 +1688,7 @@ ul {
   position: relative;
 }
 
-@media (max-width: 767.98px) {
-  .rooms__container {
-    margin: 0 -15px;
-  }
-}
+
 
 .rooms__body {
   flex: 0 0 36.6%;
@@ -1783,6 +1784,12 @@ ul {
 
 }
 
+@media (max-width: 767.98px) {
+  .rooms__slider {
+    margin: 0 -15px;
+  }
+}
+
 .slider-rooms {
   min-width: 0;
 }
@@ -1796,9 +1803,7 @@ ul {
   overflow: hidden;
   position: relative;
   height: 585px;
-  /*
-  min-height: calc(400px + (585 - 400)*((100vw - 320px)/(1270 - 320)));
-  */
+
 
 }
 
@@ -1981,11 +1986,7 @@ ul {
   position: relative;
 }
 
-@media (max-width: 767.98px) {
-  .tricks__container {
-    margin: 0 -15px;
-  }
-}
+
 
 .tricks__title {
   text-align: center;
@@ -2000,6 +2001,12 @@ ul {
 
 .tricks__slider {
   overflow: hidden;
+}
+
+@media (max-width: 767.98px) {
+  .tricks__slider {
+    margin: 0 -15px;
+  }
 }
 
 .tricks__wrapper {}
@@ -2149,7 +2156,9 @@ ul {
 
 @media (any-hover: none) {
   .furniture__body {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+
     -webkit-overflow-scrolling: touch;
   }
 }
@@ -2164,6 +2173,7 @@ ul {
 @media (any-hover: hover) {
   .furniture__items {
     justify-content: center;
+
   }
 }
 
