@@ -188,6 +188,8 @@ export const getData = (callback) => {
         }
     ]
 
+
+    return products
     callback(products)
 
     /*return fetch('/dist/json/products.json', {

@@ -68,14 +68,14 @@ export const blockBody = () => {
         return scrollWidth;
     }
 
-    document.body.style.marginRight = `${calcScroll()}px`;
+    document.body.style.paddingRight = `${calcScroll()}px`;
     document.body.style.overflow = 'hidden'
 
 
 }
 
 export const unblockBody = () => {
-    document.body.style.marginRight = '0';
+    document.body.style.paddingRight = '0';
     document.body.style.overflow = 'auto';
 
 }

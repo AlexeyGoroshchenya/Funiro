@@ -5,11 +5,7 @@ export const renderProducts = () => {
     const galery = document.querySelector('.products__items');
     const btnMore = document.querySelector('.products__btn');
 
-
-
-
     let numberCards = 4
-
 
     const setNumberOfCards = () => {
         if (galery.clientWidth > 950 && galery.clientWidth < 1237) {
@@ -18,9 +14,6 @@ export const renderProducts = () => {
             numberCards = 4
         }
     }
-
-
-
 
     const renderCard = (item) => {
 
@@ -36,15 +29,11 @@ export const renderProducts = () => {
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
 
-
-
             cart.forEach(product => {
 
                 if (product.pid == item.id) {
                     selectedButton = `<a href="#" class="actions-product__button in-cart button">In cart</a>`
                 }
-
-
 
             })
 
@@ -136,13 +125,13 @@ export const renderProducts = () => {
     }
 
     setNumberOfCards()
-    getData(startRender)
 
+    startRender(getData())
 
     btnMore.addEventListener('click', (e) => {
         e.preventDefault()
 
-        getData(moreRender)
+        moreRender(getData())
     })
 
 

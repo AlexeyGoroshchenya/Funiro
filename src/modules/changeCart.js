@@ -1,4 +1,6 @@
 import { getData } from './getData';
+import { blockBody } from './helpers';
+import { unblockBody } from './helpers';
 
 export const changeCart = () => {
 
@@ -6,6 +8,7 @@ export const changeCart = () => {
 
     let pid = 0;
     let cart = [];
+    let products = getData()
 
     const renderCartIcon = (textContent, display) => {
 
@@ -20,8 +23,6 @@ export const changeCart = () => {
     }
 
 
-    //required
-
     const renderCartBody = () => {
 
         let total = 0;
@@ -29,13 +30,13 @@ export const changeCart = () => {
         cartList.innerHTML = `
         <div class="list-cart__title">Checkout</div>
 		<div class="list-cart__close">+</div>
-        <li class="list-cart__items">
+        <ul class="list-cart__items">
 
-        </li>
+        </ul>
         <div class="list-cart__total"></div>
         <div class="list-cart__user">
-            <input type="text" class="list-cart__name" placeholder="Please indicate your name" name="name" >
-            <input type="tel" class="list-cart__phone" placeholder="Please indicate your phone" name="phone" >
+            <input type="text" class="list-cart__name" placeholder="Please indicate your name" name="name" required >
+            <input type="tel" class="list-cart__phone" placeholder="Please indicate your phone" name="phone" required >
         </div>
         <button type="submit" class="list-cart__button button">Buy now</button>`
 
@@ -79,10 +80,6 @@ export const changeCart = () => {
 
         cartList.querySelector('.list-cart__total').innerHTML = `Total price: ${total} Rp`
 
-
-
-
-
     }
 
     const renderQuantity = (elem, command) => {
@@ -92,6 +89,7 @@ export const changeCart = () => {
         const item = document.querySelector(`[data-pid="${itemId}"]`)
 
         let itemQuantity = elem.closest('.cart__item').querySelector('.quantity-cart__quantity').textContent
+
 
         if (command === 'delete') {
             removeItemFromCart(itemId)
@@ -146,6 +144,7 @@ export const changeCart = () => {
         if (cart.length === 0) {
             setTimeout(() => {
                 cartList.classList.remove('cart__list-active')
+                unblockBody()
             }, 300)
 
         }
@@ -157,48 +156,62 @@ export const changeCart = () => {
 
         let productToRemove = 0
 
-        cart.find((item, index) => {
+        let cartArr = [];
+
+        if (localStorage.getItem('cart')) {
+            cartArr = JSON.parse(localStorage.getItem('cart'));
+        }
+
+        cartArr.find((item, index) => {
             if (item.pid == id) {
                 productToRemove = index
             };
         });
 
-        cart.splice(productToRemove, 1)
+        cartArr.splice(productToRemove, 1)
 
         localStorage.removeItem('cart')
-        if (cart.length > 0) {
+        if (cartArr.length > 0) {
 
-            localStorage.setItem('cart', JSON.stringify(cart))
+            localStorage.setItem('cart', JSON.stringify(cartArr))
 
-            renderCartIcon(cart.length, 'flex')
+            renderCartIcon(cartArr.length, 'flex')
         } else {
             renderCartIcon('', 'none')
         }
 
     }
 
-    const addItemToCart = (array) => {
+    const addItemToCart = () => {
 
-        array.forEach(product => {
+        let cartArr = [];
+
+        if (localStorage.getItem('cart')) {
+            cartArr = JSON.parse(localStorage.getItem('cart'));
+        }
+
+
+        products.forEach(product => {
 
             if (+product.id === +pid) {
 
-                if (cart.length === 0) {
+                if (cartArr.length === 0) {
                     let productToCart = {}
                     productToCart.pid = pid;
                     productToCart.quantity = 1;
                     productToCart.item = product
 
-                    cart.push(productToCart)
+                    cartArr.push(productToCart)
 
                 } else {
-                    if (!cart.find(item => +item.pid === +product.id)) {
+                    if (!cartArr.find(item => +item.pid === +product.id)) {
                         let productToCart = {}
                         productToCart.pid = pid;
                         productToCart.quantity = 1;
                         productToCart.item = product
 
-                        cart.push(productToCart)
+
+                        cartArr.push(productToCart)
                     }
 
                 }
@@ -206,11 +219,22 @@ export const changeCart = () => {
             }
         });
 
-        localStorage.setItem('cart', JSON.stringify(cart))
+
+        localStorage.setItem('cart', JSON.stringify(cartArr))
+
+        cart = JSON.parse(localStorage.getItem('cart'));
 
         setTimeout(() => {
-            renderCartIcon(cart.length, 'flex')
+            if (cartArr.length > 0) {
+                renderCartIcon(cartArr.length, 'flex')
+            } else { renderCartIcon('', 'none') }
+
+
+            setTimeout(() => { cartArr.length = 0 }, 1000)
+
         }, 1000)
+
+
 
 
 
@@ -276,6 +300,7 @@ export const changeCart = () => {
         renderCartBody()
 
 
+
     }
 
 
@@ -292,10 +317,10 @@ export const changeCart = () => {
         if (e.target.classList.contains('actions-product__button') && !e.target.classList.contains('in-cart')) {
             e.preventDefault()
 
-
             pid = e.target.closest('.products__item').getAttribute('data-pid')
 
-            getData(addItemToCart)
+            addItemToCart()
+
 
             e.target.classList.add('in-cart')
             renderProductBtn(e.target, 'In cart')
@@ -319,11 +344,13 @@ export const changeCart = () => {
         if (e.target.closest('.user__cart') && cartList.querySelector('.cart__item')) {
 
             cartList.classList.add('cart__list-active')
+            blockBody()
         }
 
         if (cartList.classList.contains('cart__list-active') && e.target.classList.contains('list-cart__close')) {
 
             cartList.classList.remove('cart__list-active')
+            unblockBody()
         }
 
         if (cartList.classList.contains('cart__list-active') && e.target.classList.contains('cart__delete')) {

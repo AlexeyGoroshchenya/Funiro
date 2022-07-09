@@ -1,10 +1,11 @@
 import { changeCart } from './changeCart';
 import { renderProducts } from './renderProducts';
+import { unblockBody } from './helpers';
+import { getData } from './getData';
 
 export const sendOrderForm = (form) => {
 
-    let name = form.querySelector('.list-cart__name').value
-    let phone = form.querySelector('.list-cart__phone').value
+
 
     let cart = [];
 
@@ -33,8 +34,7 @@ export const sendOrderForm = (form) => {
         const token = '5441053399:AAHmtB5dRwz1LnS692orcmhVk3U06vzRUkA'
         const URI_API = `https://api.telegram.org/bot${token}/sendMessage`
 
-        //        let message = `<b> Заявка с сайта Funiro </b>\n`;
-        //        message += `<b>Почта: ${data.email}  </b>`;
+
 
         axios.post(URI_API, {
             chat_id: '-677057242',
@@ -45,15 +45,30 @@ export const sendOrderForm = (form) => {
                 showSubmitStatus(successText)
 
                 localStorage.removeItem('cart')
+                cart.length = 0
 
                 form.querySelectorAll('input').forEach(item => { item.value = '' })
 
                 cartList.classList.remove('cart__list-active')
+                unblockBody()
+
+
+
+
                 setTimeout(() => {
-                    changeCart()
+                    document.querySelector('.cart__list').innerHTML = ''
+                    //changeCart()
 
-                    renderProducts()
+                    document.querySelector('.cart>span').textContent = ''
+                    document.querySelector('.cart>span').style.display = 'none'
 
+                    setTimeout(() => {
+                        document.querySelectorAll('.in-cart').forEach(item => {
+                            item.classList.remove('in-cart')
+                            item.textContent = 'Add to cart'
+                        })
+                        //  renderProducts()
+                    }, 1000)
 
                 }, 2000)
 
@@ -69,6 +84,10 @@ export const sendOrderForm = (form) => {
     const submitData = () => {
 
         let totalPrice = 0
+
+        let name = form.querySelector('.list-cart__name').value
+        let phone = form.querySelector('.list-cart__phone').value
+
 
         let message = `<b> Заявка с сайта Funiro </b>\n`;
         message += `
@@ -117,6 +136,7 @@ export const sendOrderForm = (form) => {
         document.addEventListener('click', (e) => {
             if (statusBlock && statusBlock.classList.contains('submit__message') && !e.target.closest('.submit__message')) {
                 statusBlock.remove()
+
             }
         })
 
