@@ -245,6 +245,7 @@ ul {
   width: 100%;
   background-color: #eeeeee86;
   position: relative;
+  overflow-x: visible;
 
 }
 
