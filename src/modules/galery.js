@@ -61,7 +61,7 @@ export const galery = () => {
             if (getNextImageName(1)) {
                 galeryImage.classList.add('galery-in-transition')
                 setTimeout(() => {
-                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.jpg" alt="">`;
+                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(1)}.webp" alt="">`;
 
                     setTimeout(() => {
                         galeryImage.classList.remove('galery-in-transition')
@@ -76,7 +76,7 @@ export const galery = () => {
             if (getNextImageName(-1)) {
                 galeryImage.classList.add('galery-in-transition')
                 setTimeout(() => {
-                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.jpg" alt="">`;
+                    galeryImage.innerHTML = `<img src="dist/img/furniture/${getNextImageName(-1)}.webp" alt="">`;
 
                     setTimeout(() => {
                         galeryImage.classList.remove('galery-in-transition')
