@@ -12,7 +12,7 @@ export const getData = (callback) => {
                     "value": "-30%"
                 }
             ],
-            "image": "01.jpg",
+            "image": "01.webp",
             "price": "2.500.000",
             "priceOld": "3.500.000",
             "shareUrl": "#",
@@ -24,7 +24,7 @@ export const getData = (callback) => {
             "title": "Leviosa",
             "text": "Stylish cafe chair",
             "labels": "",
-            "image": "02.jpg",
+            "image": "02.webp",
             "price": "2.500.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -45,7 +45,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "03.jpg",
+            "image": "03.webp",
             "price": "7.000.000",
             "priceOld": "14.000.000",
             "shareUrl": "#",
@@ -62,7 +62,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "04.jpg",
+            "image": "04.webp",
             "price": "500.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -74,7 +74,7 @@ export const getData = (callback) => {
             "title": "Grifo",
             "text": "Night lamp",
             "labels": "",
-            "image": "05.jpg",
+            "image": "05.webp",
             "price": "1.500.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -91,7 +91,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "06.jpg",
+            "image": "06.webp",
             "price": "150.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -112,7 +112,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "07.jpg",
+            "image": "07.webp",
             "price": "7.000.000",
             "priceOld": "14.500.000",
             "shareUrl": "#",
@@ -129,7 +129,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "08.jpg",
+            "image": "08.webp",
             "price": "500.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -146,7 +146,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "09.jpg",
+            "image": "09.webp",
             "price": "500.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -163,7 +163,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "10.jpg",
+            "image": "10.webp",
             "price": "17.000.000",
             "priceOld": "",
             "shareUrl": "#",
@@ -180,7 +180,7 @@ export const getData = (callback) => {
                     "value": "New"
                 }
             ],
-            "image": "11.jpg",
+            "image": "11.webp",
             "price": "15.000.000",
             "priceOld": "",
             "shareUrl": "#",

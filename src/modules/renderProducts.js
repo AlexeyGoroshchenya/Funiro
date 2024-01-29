@@ -75,7 +75,7 @@ export const renderProducts = () => {
         </a>
         <div class="item-product__body">
             <div class="item-product__content">
-                <div class="item-product__title">${item.title}</div>
+                <h3 class="item-product__title">${item.title}</h3>
                 <div class="item-product__text">${item.text}</div>
             </div>
             <div class="item-product__prices">
